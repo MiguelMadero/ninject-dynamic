@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Dynamic", "src\Ninject.Dynamic\Ninject.Dynamic.csproj", "{3243A80A-7159-4472-8FF9-CB48C3D5EF56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Dynamic.Tests", "src\Ninject.Dynamic.Tests\Ninject.Dynamic.Tests.csproj", "{FAF8DC07-061C-4DFF-BE54-153F4C24FB29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3243A80A-7159-4472-8FF9-CB48C3D5EF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3243A80A-7159-4472-8FF9-CB48C3D5EF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3243A80A-7159-4472-8FF9-CB48C3D5EF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3243A80A-7159-4472-8FF9-CB48C3D5EF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF8DC07-061C-4DFF-BE54-153F4C24FB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF8DC07-061C-4DFF-BE54-153F4C24FB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF8DC07-061C-4DFF-BE54-153F4C24FB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF8DC07-061C-4DFF-BE54-153F4C24FB29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
