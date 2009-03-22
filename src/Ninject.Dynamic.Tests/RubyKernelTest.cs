@@ -1,11 +1,7 @@
 #region Usings
 
-using System.Collections;
 using System.Linq;
 using Ninject.Dynamic;
-using Ninject.Dynamic.Extensions;
-using Ninject.Dynamic.Modules;
-using Ninject.Modules;
 using Ninject.Tests.Fakes;
 using Xunit;
 using Xunit.Should;
@@ -21,16 +17,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         public DlrKernelContext()
         {
             kernel = new DlrKernel();
-            kernel.LoadAssemblies(typeof(DlrKernelContext));
-        }
-
-        protected void SetPath(string path)
-        {
-            IEnumerableExtensions.ForEach((IEnumerable) kernel.Components.GetAll<IModuleLoaderPlugin>(), mod =>
-                                                                                                             {
-                                                                                                                 if (mod is RubyModuleLoaderPlugin)
-                                                                                                                     ((RubyModuleLoaderPlugin) mod).SupportedPatterns = new[] {path};
-                                                                                                             });
+            kernel.LoadAssemblies(typeof (DlrKernelContext));
         }
     }
 
@@ -80,8 +67,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void SingleInstanceIsReturnedWhenOneBindingIsRegistered()
         {
-            SetPath("config_single.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_single.rb");
 
             var weapon = kernel.Get<IWeapon>();
 
@@ -92,8 +78,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void FirstInstanceIsReturnedWhenMultipleBindingsAreRegistered()
         {
-            SetPath("config_double.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_double.rb");
 
             var weapon = kernel.Get<IWeapon>();
 
@@ -104,8 +89,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void DependenciesAreInjectedViaConstructor()
         {
-            SetPath("config_two_types.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_two_types.rb");
 
             var warrior = kernel.Get<IWarrior>();
 
@@ -121,8 +105,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void SingleInstanceIsReturnedWhenOneBindingIsRegistered()
         {
-            SetPath("config_to_self.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_to_self.rb");
 
             var weapon = kernel.Get<Sword>();
 
@@ -134,8 +117,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void DependenciesAreInjectedViaConstructor()
         {
-            SetPath("config_two_types_to_self.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_two_types_to_self.rb");
 
             var samurai = kernel.Get<Samurai>();
 
@@ -151,8 +133,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void GenericParametersAreInferred()
         {
-            SetPath("config_open_generics.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_open_generics.rb");
 
             var services = kernel.GetAll<IGeneric<int>>().ToArray();
 
@@ -168,8 +149,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ReturnsServiceRegisteredViaBindingWithSpecifiedName()
         {
-            SetPath("config_named.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_named.rb");
 
             var weapon = kernel.Get<IWeapon>("sword");
 
@@ -180,8 +160,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ReturnsServiceRegisteredViaBindingThatMatchesPredicate()
         {
-            SetPath("config_metadata.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_metadata.rb");
 
             var weapon = kernel.Get<IWeapon>(x => x.Get<string>("type") == "melee");
 
@@ -195,8 +174,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ReturnsServiceRegistered()
         {
-            SetPath("config_constructor_arguments.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_constructor_arguments.rb");
 
             var weapon = kernel.Get<IWeapon>();
 
@@ -208,8 +186,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ReturnsServiceWhenRegisteredAsDSL()
         {
-            SetPath("config_constructor_arguments_dsl.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_constructor_arguments_dsl.rb");
 
             var weapon = kernel.Get<IWeapon>();
 
@@ -224,8 +201,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ResolvesTheCorrectTypeAccordingToCondition()
         {
-            SetPath("config_when.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_when.rb");
 
             var weapon = kernel.Get<IWeapon>();
             var warrior = kernel.Get<IWarrior>();
@@ -239,8 +215,7 @@ namespace Ninject.Tests.Integration.DlrKernelTests
         [Fact]
         public void ResolvesTheCorrectTypeAccordingToConditionWithDsl()
         {
-            SetPath("config_when_dsl.rb");
-            kernel.AutoLoadModulesRecursively("~");
+            kernel.Load("ruby/config_when_dsl.rb");
 
             var weapon = kernel.Get<IWeapon>();
             var warrior = kernel.Get<IWarrior>();

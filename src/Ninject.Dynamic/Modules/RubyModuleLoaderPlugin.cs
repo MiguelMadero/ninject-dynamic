@@ -19,7 +19,7 @@ namespace Ninject.Dynamic.Modules
         private static readonly string[] Patterns = new[] { "*.rb", "*.erb" };
         
         //FIXME: Do not forget to move me to the tests project
-        private ICollection<string> _patterns = new string[1];
+        private IEnumerable<string> _patterns = new string[1];
         private readonly IRubyEngine _engine;
 
         public RubyModuleLoaderPlugin(IKernel kernel, IRubyEngine engine)
@@ -40,7 +40,7 @@ namespace Ninject.Dynamic.Modules
         /// <summary>
         /// Gets the file patterns (*.rb, etc.) supported by the plugin.
         /// </summary>
-        public ICollection<string> SupportedPatterns
+        public IEnumerable<string> SupportedExtensions
         {
             get
             {
@@ -61,9 +61,10 @@ namespace Ninject.Dynamic.Modules
             files.ForEach(file =>
                               {
                                   var rubyModule = new RubyModule(_engine, file);
-                                  Kernel.LoadModule(rubyModule);
+                                  Kernel.Load(rubyModule);
                               });
         }
+
 
         #endregion
     }

@@ -1,13 +1,16 @@
+#region Usings
+
 using System.IO;
 using Ninject.Dynamic.Modules;
-using Ninject.Infrastructure.Introspection;
 using Ninject.Modules;
+
+#endregion
 
 namespace Ninject.Dynamic.Extensions
 {
     internal static class ExceptionFormatter
     {
-        public static string ModuleWithSameNameIsAlreadyLoaded(RubyModule newModule, IModule existingModule)
+        public static string ModuleWithSameNameIsAlreadyLoaded(RubyModule newModule, INinjectModule existingModule)
         {
             using (var sw = new StringWriter())
             {

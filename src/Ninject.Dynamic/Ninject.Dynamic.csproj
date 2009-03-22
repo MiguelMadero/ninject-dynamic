@@ -70,7 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Activation\Providers\RubyProcProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssemblyStreamContentProvider.cs" />
     <Compile Include="DlrKernel.cs" />
     <Compile Include="Enums.cs" />
@@ -84,7 +88,6 @@
     <Compile Include="IRubyEngine.cs" />
     <Compile Include="Modules\RubyModule.cs" />
     <Compile Include="Modules\RubyModuleLoaderPlugin.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RubyEngine.cs" />
     <Compile Include="Workarounds.cs" />
   </ItemGroup>
